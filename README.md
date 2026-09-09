@@ -1,4 +1,4 @@
-# BÀI TẬP 1 - CƠ SỞ LOGIC VÀ ĐẠI SỐ MÁY TÍNH
+# BÀI TẬP 1 - CHUYÊN ĐỀ NGHIÊN CỨU VÀ ỨNG DỤNG VỀ CÔNG NGHỆ TRI THỨC
 
 Dự án hoàn thiện lời giải và mã nguồn chương trình cho **BÀI TẬP 1**, bao gồm:
 1. **Bài 1**: Biểu diễn các phát biểu trong logic vị từ $C(x), D(x), F(x)$.
@@ -69,6 +69,31 @@ python main.py
 ---
 
 ## Báo cáo LaTeX
-File `Bao_Cao_Bai_Tap_1.tex` được thiết kế tương thích hoàn toàn với:
-- [Overleaf](https://www.overleaf.com): Tạo New Project -> Upload file `Bao_Cao_Bai_Tap_1.tex` và Recompile (chọn pdfLaTeX hoặc XeLaTeX).
-- VS Code với extension LaTeX Workshop hoặc TeXmaker / MiKTeX / MacTeX.
+
+### Biên dịch tại chỗ (không cần quyền root)
+
+Dự án dùng [tectonic](https://tectonic-typesetting.github.io), một binary tĩnh tự tải
+đúng những gói LaTeX mà tài liệu cần, nên không phải cài cả bộ TeX Live:
+
+```bash
+# Cài một lần, vào ~/.local/bin (đã sẵn trong PATH)
+curl -sL -o /tmp/tectonic.tar.gz \
+  "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-gnu.tar.gz"
+tar xzf /tmp/tectonic.tar.gz -C /tmp && install -m755 /tmp/tectonic ~/.local/bin/
+
+# Biên dịch, kết quả ra Bao_Cao_Bai_Tap_1.pdf
+tectonic -X compile Bao_Cao_Bai_Tap_1.tex
+```
+
+Lần chạy đầu mất một lúc để tải gói về, các lần sau dùng cache nên nhanh.
+
+### Biên dịch nơi khác
+- [Overleaf](https://www.overleaf.com): Tạo New Project -> Upload file `Bao_Cao_Bai_Tap_1.tex` và Recompile. Chạy được với **cả pdfLaTeX lẫn XeLaTeX**.
+- VS Code với extension LaTeX Workshop, hoặc TeXmaker / MiKTeX / MacTeX.
+
+### Lưu ý về font tiếng Việt
+Preamble tự nhận engine biên dịch để chọn cách nạp font:
+- **pdfLaTeX** dùng `inputenc` utf8 cộng `fontenc` **T5** và `lmodern`. Thiếu T5 thì các chữ hai dấu như `ể ễ ị ừ ộ` sẽ bị rơi mất dấu.
+- **XeLaTeX / LuaLaTeX** dùng `fontspec`, mặc định lấy Latin Modern vốn phủ đủ bảng chữ tiếng Việt.
+
+Đừng bỏ khối `\ifPDFTeX` trong preamble, nó là thứ giữ cho file chạy được trên cả hai engine.

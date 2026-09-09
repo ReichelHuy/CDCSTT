@@ -1,5 +1,17 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
+
+% Thiet lap font theo tung engine bien dich.
+% pdfLaTeX can fontenc T5 moi du dau tieng Viet (e, i, u co hai dau).
+% XeLaTeX va LuaLaTeX dung fontspec voi font Unicode.
+\usepackage{iftex}
+\ifPDFTeX
+    \usepackage[utf8]{inputenc}
+    \usepackage[T5]{fontenc}
+    \usepackage{lmodern}
+\else
+    \usepackage{fontspec}   % mac dinh dung Latin Modern, phu du dau tieng Viet
+\fi
+
 \usepackage[vietnamese]{babel}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{geometry}
@@ -41,7 +53,7 @@
 }
 \lstset{style=pythonstyle}
 
-\title{\textbf{BÁO CÁO KẾT QUẢ BÀI TẬP 1}\\ \large Môn học: Cơ sở Logic và Toán rời rạc / Đại số máy tính}
+\title{\textbf{BÁO CÁO KẾT QUẢ BÀI TẬP 1}\\ \large Môn học: Chuyên đề nghiên cứu và ứng dụng về Công nghệ tri thức}
 \author{\textbf{Nhóm sinh viên thực hiện}}
 \date{\today}
 
@@ -54,9 +66,9 @@
 \hline
 \textbf{STT} & \textbf{Họ và tên} & \textbf{Mã Học Viên / MSSV} & \textbf{Lớp} \\
 \hline
-1 & Nguyễn Đình Duy & (Điền MSSV) & (Điền Lớp) \\
-2 & Thành viên 2 & (Điền MSSV) & (Điền Lớp) \\
-3 & Thành viên 3 & (Điền MSSV) & (Điền Lớp) \\
+1 & Đặng Quốc Lộc & 26848116 & CS2307 \\
+2 & \textit{(chưa điền)} & \textit{(chưa điền)} & \textit{(chưa điền)} \\
+3 & \textit{(chưa điền)} & \textit{(chưa điền)} & \textit{(chưa điền)} \\
 \hline
 \end{tabular}
 \end{center}
@@ -129,6 +141,52 @@ Biểu diễn các phát biểu sau theo $C(x), D(x), F(x)$, các lượng từ 
     \end{equation}
 \end{itemize}
 
+\subsection{Kiểm chứng chân trị trên mô hình cụ thể}
+
+Năm công thức trên đều là mệnh đề đóng, nên trên mỗi mô hình chúng nhận một giá trị chân trị xác định. Chương trình \texttt{bai\_1\_logic.py} dựng mô hình $M_1$ gồm bốn sinh viên rồi tính lại năm giá trị đó bằng \texttt{any} và \texttt{all} của Python, hai hàm này tương ứng trực tiếp với $\exists$ và $\forall$. Bảng dưới bổ sung thêm mô hình $M_2$ để đối chiếu.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Mô hình} & \textbf{Sinh viên} & $C$ (mèo) & $D$ (chó) & $F$ (chồn) \\
+\hline
+$M_1$ & SV1 & $\bullet$ & $\circ$ & $\circ$ \\
+$M_1$ & SV2 & $\circ$ & $\bullet$ & $\circ$ \\
+$M_1$ & SV3 & $\circ$ & $\circ$ & $\bullet$ \\
+$M_1$ & SV4 & $\bullet$ & $\circ$ & $\bullet$ \\
+\hline
+$M_2$ & SV1 & $\bullet$ & $\circ$ & $\circ$ \\
+$M_2$ & SV2 & $\circ$ & $\bullet$ & $\circ$ \\
+$M_2$ & SV3 & $\circ$ & $\circ$ & $\circ$ \\
+$M_2$ & SV4 & $\bullet$ & $\bullet$ & $\bullet$ \\
+\hline
+\end{tabular}
+\caption{Hai mô hình mẫu. Ký hiệu $\bullet$ là có nuôi, $\circ$ là không nuôi.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Mô hình} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} \\
+\hline
+$M_1$ & Đúng & Đúng & Đúng & Đúng & Đúng \\
+$M_2$ & Đúng & Sai & Sai & Sai & Đúng \\
+\hline
+\end{tabular}
+\caption{Giá trị chân trị của năm công thức trên hai mô hình.}
+\end{table}
+
+Trên $M_1$ cả năm câu đều đúng, nên riêng mô hình này chưa phân biệt được các công thức với nhau. Mô hình $M_2$ mới cho thấy chúng thật sự khác nhau:
+\begin{itemize}
+    \item Câu b sai vì SV3 không nuôi con nào, phá vỡ lượng từ $\forall$.
+    \item Câu d sai vì SV4 nuôi đủ cả ba loài, đúng vào điều mà câu d cấm.
+    \item Câu c sai vì người duy nhất có cả mèo lẫn chồn là SV4 thì lại nuôi chó.
+    \item Câu e vẫn đúng: mỗi loài đều tìm được người nuôi, dù ba người đó không phải một.
+\end{itemize}
+Điều này xác nhận cách hiểu ở câu e là đúng: câu e và câu d cùng đúng trên $M_1$ nhưng tách nhau trên $M_2$, nên hai câu không thể quy về cùng một công thức.
+
 \newpage
 \section{BÀI 2*: Logic bậc nhất nâng cao và Chứng minh hình thức}
 
@@ -149,8 +207,14 @@ Biểu diễn các phát biểu sau theo $C(x), D(x), F(x)$, các lượng từ 
     \item \textbf{Dạng chuẩn:} $\forall x \, (L(x) \to \neg C(x))$ hoặc $\neg \exists x \, (L(x) \land C(x))$.
     \item \textbf{Sử dụng dấu $=$:}
     \begin{equation}
+        \forall x \forall y \, ((L(x) \land C(y)) \to x \neq y)
+    \end{equation}
+    Cách đọc: lấy bất kỳ một nhà logic $x$ và bất kỳ một người uống café $y$, hai người đó không bao giờ là một.
+    \item \textbf{Dạng tương đương:} cách viết sau cũng đúng và tương đương hoàn toàn:
+    \begin{equation}
         \forall x \forall y \, ((y = x \land L(x)) \to \neg C(y))
     \end{equation}
+    Cả hai đều rút về $\forall x \forall y \, \neg (x = y \land L(x) \land C(y))$, chỉ khác chỗ đặt đẳng thức ở vế trái hay vế phải của phép kéo theo.
 \end{itemize}
 
 \subsubsection{b. Bất kỳ ai là một nhà logic cũng đều là bạn của ai đó}
@@ -211,25 +275,25 @@ Biểu diễn các phát biểu sau theo $C(x), D(x), F(x)$, các lượng từ 
 \textbf{Bảng các bước suy diễn hình thức:}
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|l|p{8cm}|}
+\begin{tabular}{|c|l|p{6.6cm}|c|}
 \hline
-\textbf{Bước} & \textbf{Biểu thức khẳng định} & \textbf{Lý do / Quy tắc suy diễn} \\
+\textbf{Bước} & \textbf{Biểu thức khẳng định} & \textbf{Quy tắc suy diễn} & \textbf{Từ} \\
 \hline
-1 & $\exists x \, L(f(x))$ & Tiền đề (3) \\
-2 & $L(f(c))$ & Đặc tả tồn tại (Existential Instantiation - EI) từ 1, với $c$ là một cá thể cụ thể. \\
-3 & Đặt $y_0 = f(c)$ & Do $c$ thuộc miền biến nên bạn của $c$ là $y_0 = f(c)$ là một cá thể xác định. Ta có $L(y_0)$. \\
-4 & $\forall x \, (L(x) \to C(x))$ & Tiền đề (1) \\
-5 & $L(y_0) \to C(y_0)$ & Đặc tả phổ dụng (Universal Instantiation - UI) từ 4 với $x = y_0$. \\
-6 & $C(y_0)$ & Luật Modus Ponens từ 3 và 5. \\
-7 & $\forall x \, (\neg T(x) \to \neg C(x))$ & Tiền đề (2) \\
-8 & $\forall x \, (C(x) \to T(x))$ & Luật phản đảo tương đương logic từ 7. \\
-9 & $C(y_0) \to T(y_0)$ & Đặc tả phổ dụng (UI) từ 8 với $x = y_0$. \\
-10 & $T(y_0)$ & Luật Modus Ponens từ 6 và 9. \\
-11 & $L(y_0) \land C(y_0) \land T(y_0)$ & Luật hội (Conjunction) từ các bước 3, 6 và 10. \\
-12 & $\exists x \, (L(x) \land C(x) \land T(x))$ & Khái quát hóa tồn tại (Existential Generalization - EG) từ 11. \\
+1 & $\exists x \, L(f(x))$ & Tiền đề (3) & --- \\
+2 & $L(f(c))$ & Đặc tả tồn tại (Existential Instantiation), với $c$ là một cá thể mới chưa xuất hiện trước đó & 1 \\
+3 & $L(y_0)$, đặt $y_0 = f(c)$ & Đặt tên hạng từ: $f(c)$ là một hạng từ đóng xác định nên gọi được là $y_0$ & 2 \\
+4 & $\forall x \, (L(x) \to C(x))$ & Tiền đề (1) & --- \\
+5 & $L(y_0) \to C(y_0)$ & Đặc tả phổ dụng (Universal Instantiation), thay $x$ bởi $y_0$ & 4 \\
+6 & $C(y_0)$ & Modus Ponens & 3, 5 \\
+7 & $\forall x \, (\neg T(x) \to \neg C(x))$ & Tiền đề (2) & --- \\
+8 & $\forall x \, (C(x) \to T(x))$ & Luật phản đảo (contrapositive), tương đương logic & 7 \\
+9 & $C(y_0) \to T(y_0)$ & Đặc tả phổ dụng, thay $x$ bởi $y_0$ & 8 \\
+10 & $T(y_0)$ & Modus Ponens & 6, 9 \\
+11 & $L(y_0) \land C(y_0) \land T(y_0)$ & Luật hội (conjunction) & 3, 6, 10 \\
+12 & $\exists x \, (L(x) \land C(x) \land T(x))$ & Khái quát hoá tồn tại (Existential Generalization) & 11 \\
 \hline
 \end{tabular}
-\caption{Bảng suy diễn chứng minh kết luận từ các tiền đề}
+\caption{Bảng suy diễn chứng minh kết luận từ các tiền đề. Cột cuối ghi rõ mỗi bước rút ra từ những bước nào.}
 \end{table}
 
 \textbf{Kết luận:} Suy luận hợp lý, mệnh đề được chứng minh hoàn tất (Q.E.D.).
@@ -301,10 +365,34 @@ $(m^2 - 4)x + 2m - 4 = 0 \iff (m^2 - 4)x = 4 - 2m = -2(m - 2)$.
     \end{itemize}
 \end{enumerate}
 
+\subsection{Bảng tổng hợp kết quả biện luận}
+
+Toàn bộ biện luận của câu b* quy về bốn trường hợp phủ kín $\mathbb{R}$ và đôi một rời nhau. Đây chính là điều kiện để lời giải được coi là đầy đủ.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Điều kiện của $m$} & \textbf{Phương trình trở thành} & \textbf{Kết luận} \\
+\hline
+$m = 2$ & $-8x + 4 = 0$ & Nghiệm duy nhất $x = \frac{1}{2}$ \\
+\hline
+$m < -2$ & $\Delta' = 4(m+2) < 0$ & Vô nghiệm thực \\
+\hline
+$m = -2$ & $-4x^2 = 0$ & Nghiệm kép $x = 0$ \\
+\hline
+$m > -2$ và $m \ne 2$ & $\Delta' = 4(m+2) > 0$ & Hai nghiệm $x_{1,2} = \frac{(m+2) \pm 2\sqrt{m+2}}{m-2}$ \\
+\hline
+\end{tabular}
+\caption{Bốn trường hợp biện luận của phương trình bậc hai theo tham số $m$.}
+\end{table}
+
+Kết quả chạy chương trình trùng khớp hoàn toàn với bảng trên. Hai chỗ chương trình còn in ra dạng thô so với bài trình bày: biểu thức $-(-m-2)$ chưa được rút thành $m+2$, và các nhánh dấu của $\Delta'$ dừng lại ở bất phương trình $4(m+2) < 0$ chứ chưa quy ra khoảng $m < -2$. Cả hai đều không sai, chỉ là phần rút gọn cuối để dành cho người đọc.
+
 \newpage
 \section{BÀI 4: Phân tích đa thức thành nhân tử từng bước}
 
-\subsection{Yêu cầu và Thuật toán}
+\subsection{Yêu cầu của đề bài}
 Viết chương trình thực hiện giải từng bước bài toán phân tích đa thức thành nhân tử theo hướng dẫn:
 \begin{itemize}
     \item Sử dụng hàm \texttt{factor} của thư viện đại số máy tính để thu được kết quả cuối cùng.
@@ -312,6 +400,14 @@ Viết chương trình thực hiện giải từng bước bài toán phân tíc
     \item Khai triển thành các nhóm trung gian, sau đó đặt nhân tử chung từng nhóm và cuối cùng gom lại thành dạng tích.
     \item Sử dụng đệ quy cho trường hợp có từ 3 thừa số trở lên.
 \end{itemize}
+
+\subsection{Ý tưởng: chạy ngược từ đáp số}
+
+Đây là bài duy nhất trong bốn bài mà đáp số không phải là thứ cần tìm. Gọi \texttt{sp.factor} một lần là ra ngay $(x+y)(x-y)$, nhưng đề bài đòi hỏi các bước trung gian mà một học sinh sẽ viết ra. Thuật toán vì thế chia làm hai chặng:
+\begin{enumerate}
+    \item \textbf{Chặng xuôi:} gọi \texttt{sp.factor\_list} để lấy danh sách nhân tử bất khả quy, rồi ghép thành $f_1 \cdot f_2$.
+    \item \textbf{Chặng ngược:} lấy dạng tích đó làm đầu vào, tách $f_1$ thành các hạng tử, nhân từng hạng tử với $f_2$ rồi khai triển, đặt nhân tử chung cho từng nhóm, cuối cùng gom lại thành tích.
+\end{enumerate}
 
 \subsection{Ví dụ mẫu}
 Phân tích đa thức $x^2 - y^2$:
@@ -321,26 +417,64 @@ Phân tích đa thức $x^2 - y^2$:
               &= (x + y)(x - y)
 \end{align*}
 
+\subsection{Ví dụ mở rộng: tam thức bậc hai}
+Thuật toán không phụ thuộc vào dạng hằng đẳng thức. Với $x^2 - 5x + 6$, hàm \texttt{factor} trả về $(x-3)(x-2)$, chương trình tách $x - 3$ thành hai hạng tử $-3$ và $x$ rồi dựng lại đúng chuỗi biến đổi sau:
+\begin{align*}
+    x^2 - 5x + 6 &= (6 - 3x) + (x^2 - 2x) \\
+                 &= -3(x - 2) + x(x - 2) \\
+                 &= (x - 3)(x - 2)
+\end{align*}
+
 \subsection{Cài đặt thuật toán bằng Python}
-Mã nguồn hàm phân tích từng bước trong file \texttt{bai\_4\_phan\_tich\_nhan\_tu.py}:
+\begin{sloppypar}
+Mã nguồn hàm phân tích từng bước trong file \texttt{bai\_4\_phan\_tich\_nhan\_tu.py}. Hàm \texttt{format\_poly} chỉ đổi ký hiệu luỹ thừa \texttt{**} của sympy thành \texttt{\^{}} cho dễ đọc:
+\end{sloppypar}
 \begin{lstlisting}[language=Python]
 import sympy as sp
 
-def phan_tich_tung_buoc_2_thua_so(f1, f2):
-    terms_f1 = sp.Add.make_args(f1)
-    
-    # Buoc 1: Khai trien tung nhom: hang tu cua f1 nhan f2
-    expanded_groups = [sp.expand(t * f2) for t in terms_f1]
-    step1_str = " + ".join(f"({g})" for g in expanded_groups)
-    
-    # Buoc 2: Dat nhan tu chung cho tung nhom
-    step2_str = " + ".join(f"{t}({f2})" for t in terms_f1)
-    
-    # Buoc 3: Nhan tu tich cuoi cung
-    step3_str = f"({f1})({f2})"
-    
-    return step1_str, step2_str, step3_str
+def format_poly(expr):
+    return str(expr).replace("**", "^")
+
+def lay_nhan_tu_bat_kha_quy(expr):
+    # factor tra ve chinh bieu thuc cu khi dau vao da o dang tich,
+    # nen khong phan biet duoc "da phan tich roi" voi "bat kha quy".
+    # factor_list luon cho biet so nhan tu that su.
+    he_so, cac_cap = sp.factor_list(expr)
+    nhan_tu = []
+    for co_so, so_mu in cac_cap:      # (x + 1)**2 -> [x + 1, x + 1]
+        nhan_tu.extend([co_so] * so_mu)
+    return he_so, nhan_tu
+
+def dung_ba_buoc(f1, f2):
+    hang_tu_f1 = sp.Add.make_args(f1)
+    f2_str = format_poly(f2)
+
+    # Buoc 1: nhan tung hang tu cua f1 voi f2 roi khai trien
+    nhom = [sp.expand(t * f2) for t in hang_tu_f1]
+    buoc_1 = " + ".join(f"({format_poly(g)})" for g in nhom)
+
+    # Buoc 2: dat nhan tu chung f2 cho tung nhom
+    buoc_2 = noi_tong([viet_tich(t, f2_str) for t in hang_tu_f1])
+
+    # Buoc 3: gom lai thanh tich
+    buoc_3 = f"({format_poly(f1)})({f2_str})"
+
+    return buoc_1, buoc_2, buoc_3
 \end{lstlisting}
+
+\subsection{Vai trò của đệ quy}
+Khi \texttt{factor\_list} trả về nhiều hơn hai nhân tử, chương trình giữ nhân tử đầu làm $f_1$, gộp phần còn lại thành $f_2$, dựng ba bước như trên, rồi \textbf{gọi lại chính nó} trên $f_2$ \emph{sau khi khai triển}. Bước khai triển này là bắt buộc: nếu truyền thẳng $f_2$ ở dạng tích thì tầng đệ quy không còn gì để phân tích. Chiều sâu đệ quy bằng số nhân tử trừ một, mỗi tầng lùi thêm một mức thụt đầu dòng khi in ra.
+
+\subsection{Ví dụ đệ quy}
+Với $x^3 + x^2 - xy^2 - y^2$, hàm \texttt{factor\_list} cho ba nhân tử bất khả quy là $x+1$, $x-y$ và $x+y$. Chương trình lấy $f_1 = x+1$, gộp phần còn lại thành $f_2 = (x-y)(x+y)$, dựng ba bước, rồi gọi đệ quy trên $f_2$ sau khi khai triển:
+\begin{align*}
+    x^3 + x^2 - xy^2 - y^2 &= (x^2 - y^2) + (x^3 - xy^2) \\
+                           &= (x-y)(x+y) + x(x-y)(x+y) \\
+                           &= (x + 1)(x-y)(x+y)
+\end{align*}
+Tầng đệ quy tiếp theo nhận $x^2 - y^2$ và dựng lại đúng chuỗi biến đổi của ví dụ mẫu ở trên.
+
+Thứ tự chọn $f_1$ không tuỳ tiện: chương trình ưu tiên thừa số không chứa hạng tử mang dấu trừ, nhờ vậy chuỗi biến đổi ít dấu âm nhất và ví dụ $x^2 - y^2$ ra đúng lời giải mẫu mà đề bài đưa.
 
 \newpage
 \section{Hướng dẫn chạy mã nguồn Python và Cấu trúc nộp bài}
