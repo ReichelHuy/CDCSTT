@@ -1,0 +1,383 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\geometry{a4paper, left=25mm, right=20mm, top=25mm, bottom=25mm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=cyan,
+    citecolor=red
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+\lstset{style=pythonstyle}
+
+\title{\textbf{BÁO CÁO KẾT QUẢ BÀI TẬP 1}\\ \large Môn học: Cơ sở Logic và Toán rời rạc / Đại số máy tính}
+\author{\textbf{Nhóm sinh viên thực hiện}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{STT} & \textbf{Họ và tên} & \textbf{Mã Học Viên / MSSV} & \textbf{Lớp} \\
+\hline
+1 & Nguyễn Đình Duy & (Điền MSSV) & (Điền Lớp) \\
+2 & Thành viên 2 & (Điền MSSV) & (Điền Lớp) \\
+3 & Thành viên 3 & (Điền MSSV) & (Điền Lớp) \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{5mm}
+\hrule
+\vspace{5mm}
+
+\tableofcontents
+\newpage
+
+\section{BÀI 1: Biểu diễn logic vị từ}
+
+\subsection{Đề bài}
+Đặt:
+\begin{itemize}
+    \item $C(x)$: ``$x$ có một con mèo''
+    \item $D(x)$: ``$x$ có một con chó''
+    \item $F(x)$: ``$x$ có một con chồn''
+\end{itemize}
+Biểu diễn các phát biểu sau theo $C(x), D(x), F(x)$, các lượng từ và các phép nối logic. Xét không gian biến là các sinh viên trong lớp.
+
+\subsection{Lời giải chi tiết}
+
+\subsubsection{a) Một sinh viên trong lớp có một con mèo, một con chó hay một con chồn}
+\begin{itemize}
+    \item \textbf{Phân tích:} Phát biểu khẳng định sự tồn tại ($\exists$) của ít nhất một sinh viên trong lớp sở hữu ít nhất một trong ba con vật (phép tuyển $\lor$).
+    \item \textbf{Công thức logic:}
+    \begin{equation}
+        \exists x \, (C(x) \lor D(x) \lor F(x))
+    \end{equation}
+\end{itemize}
+
+\subsubsection{b) Tất cả sinh viên trong lớp có một con mèo, một con chó hay một con chồn}
+\begin{itemize}
+    \item \textbf{Phân tích:} Khẳng định với mọi ($\forall$) sinh viên trong lớp, mỗi người đều có ít nhất một con vật nuôi thuộc một trong ba loài trên.
+    \item \textbf{Công thức logic:}
+    \begin{equation}
+        \forall x \, (C(x) \lor D(x) \lor F(x))
+    \end{equation}
+\end{itemize}
+
+\subsubsection{c) Một sinh viên nào đó có một con mèo và một con chồn nhưng không có chó}
+\begin{itemize}
+    \item \textbf{Phân tích:} Tồn tại sinh viên $x$ thỏa mãn đồng thời: $C(x)$ đúng, $F(x)$ đúng và phủ định của $D(x)$ đúng ($\neg D(x)$).
+    \item \textbf{Công thức logic:}
+    \begin{equation}
+        \exists x \, (C(x) \land F(x) \land \neg D(x))
+    \end{equation}
+\end{itemize}
+
+\subsubsection{d) Không có sinh viên nào trong lớp có một con mèo, một con chó và một con chồn}
+\begin{itemize}
+    \item \textbf{Phân tích:} Phủ định mệnh đề tồn tại một sinh viên sở hữu đồng thời cả 3 loài thú nuôi:
+    \begin{equation}
+        \neg \exists x \, (C(x) \land D(x) \land F(x))
+    \end{equation}
+    Theo quy tắc De Morgan đối với lượng từ, mệnh đề này hoàn toàn tương đương với:
+    \begin{equation}
+        \forall x \, \neg (C(x) \land D(x) \land F(x)) \iff \forall x \, (\neg C(x) \lor \neg D(x) \lor \neg F(x))
+    \end{equation}
+\end{itemize}
+
+\subsubsection{e) Với mỗi loại con vật trên, có một sinh viên trong lớp có một con}
+\begin{itemize}
+    \item \textbf{Phân tích:} Có 3 loài vật được xét là mèo, chó và chồn. Với từng loài, tồn tại ít nhất một sinh viên trong lớp nuôi con vật đó (các sinh viên này không nhất thiết phải trùng nhau).
+    \item \textbf{Công thức logic:}
+    \begin{equation}
+        (\exists x \, C(x)) \land (\exists y \, D(y)) \land (\exists z \, F(z))
+    \end{equation}
+\end{itemize}
+
+\newpage
+\section{BÀI 2*: Logic bậc nhất nâng cao và Chứng minh hình thức}
+
+\subsection{Đề bài}
+Đặt:
+\begin{itemize}
+    \item $L(x)$: ``$x$ là một nhà logic''
+    \item $C(x)$: ``$x$ uống café''
+    \item $W(x)$: ``$x$ làm việc chăm chỉ''
+    \item $T(x)$: ``$x$ phát biểu định lý''
+    \item $f(x)$: Hàm trả ra giá trị là bạn của $x$ (giả sử mỗi người có đúng 1 bạn).
+\end{itemize}
+
+\subsection{Phần 1: Biểu diễn các câu dưới dạng logic bậc nhất (có sử dụng dấu =)}
+
+\subsubsection{a. Không nhà logic nào uống café}
+\begin{itemize}
+    \item \textbf{Dạng chuẩn:} $\forall x \, (L(x) \to \neg C(x))$ hoặc $\neg \exists x \, (L(x) \land C(x))$.
+    \item \textbf{Sử dụng dấu $=$:}
+    \begin{equation}
+        \forall x \forall y \, ((y = x \land L(x)) \to \neg C(y))
+    \end{equation}
+\end{itemize}
+
+\subsubsection{b. Bất kỳ ai là một nhà logic cũng đều là bạn của ai đó}
+\begin{itemize}
+    \item \textbf{Phân tích:} Nếu $x$ là một nhà logic thì tồn tại một người $y$ sao cho người bạn duy nhất của $y$ chính là $x$ ($x = f(y)$).
+    \item \textbf{Biểu diễn:}
+    \begin{equation}
+        \forall x \, (L(x) \to \exists y \, (x = f(y)))
+    \end{equation}
+\end{itemize}
+
+\subsubsection{c. Không người nào phát biểu được định lý lại có một người bạn uống café}
+\begin{itemize}
+    \item \textbf{Phân tích:} Với mọi $x$, nếu $x$ phát biểu được định lý ($T(x)$) thì bạn của $x$ ($f(x)$) không uống café ($\neg C(f(x))$).
+    \item \textbf{Biểu diễn (sử dụng dấu $=$):}
+    \begin{equation}
+        \forall x \forall y \, ((y = f(x) \land T(x)) \to \neg C(y))
+    \end{equation}
+    (Hoặc dạng rút gọn qua hàm: $\forall x \, (T(x) \to \neg C(f(x)))$).
+\end{itemize}
+
+\subsubsection{d. Ai có một người bạn làm việc chăm chỉ thì hoặc là một nhà logic hoặc cũng là một người làm việc chăm chỉ}
+\begin{itemize}
+    \item \textbf{Phân tích:} Với mọi cá thể $x$, nếu bạn của $x$ (tức $y = f(x)$) làm việc chăm chỉ ($W(y)$) thì $x$ là nhà logic ($L(x)$) hoặc $x$ làm việc chăm chỉ ($W(x)$).
+    \item \textbf{Biểu diễn:}
+    \begin{equation}
+        \forall x \forall y \, ((y = f(x) \land W(y)) \to (L(x) \lor W(x)))
+    \end{equation}
+    (Tương đương: $\forall x \, (W(f(x)) \to (L(x) \lor W(x)))$).
+\end{itemize}
+
+\subsubsection{e. Mọi người bạn là một nhà logic}
+\begin{itemize}
+    \item \textbf{Phân tích:} Bất cứ ai là bạn của một người nào đó (nghĩa là tồn tại $y$ sao cho $x = f(y)$) thì người $x$ đó đều là một nhà logic.
+    \item \textbf{Biểu diễn:}
+    \begin{equation}
+        \forall x \, (\exists y \, (x = f(y)) \to L(x))
+    \end{equation}
+    Mệnh đề này tương đương logic với khẳng định: bạn của bất kỳ ai trong xã hội đều là nhà logic:
+    \begin{equation}
+        \forall y \, L(f(y))
+    \end{equation}
+\end{itemize}
+
+\subsection{Phần 2: Chứng minh hình thức suy luận logic}
+\textbf{Các tiền đề:}
+\begin{enumerate}
+    \item[(1)] Tất cả nhà logic đều uống café: $\forall x \, (L(x) \to C(x))$
+    \item[(2)] Ai không phát biểu được định lý đều không uống café: $\forall x \, (\neg T(x) \to \neg C(x))$
+    \item[(3)] Có một số người mà bạn của họ là nhà logic: $\exists x \, L(f(x))$
+\end{enumerate}
+
+\textbf{Kết luận cần chứng minh:} Có một nhà logic uống café và phát biểu được định lý:
+\begin{equation}
+    \exists x \, (L(x) \land C(x) \land T(x))
+\end{equation}
+
+\textbf{Bảng các bước suy diễn hình thức:}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|l|p{8cm}|}
+\hline
+\textbf{Bước} & \textbf{Biểu thức khẳng định} & \textbf{Lý do / Quy tắc suy diễn} \\
+\hline
+1 & $\exists x \, L(f(x))$ & Tiền đề (3) \\
+2 & $L(f(c))$ & Đặc tả tồn tại (Existential Instantiation - EI) từ 1, với $c$ là một cá thể cụ thể. \\
+3 & Đặt $y_0 = f(c)$ & Do $c$ thuộc miền biến nên bạn của $c$ là $y_0 = f(c)$ là một cá thể xác định. Ta có $L(y_0)$. \\
+4 & $\forall x \, (L(x) \to C(x))$ & Tiền đề (1) \\
+5 & $L(y_0) \to C(y_0)$ & Đặc tả phổ dụng (Universal Instantiation - UI) từ 4 với $x = y_0$. \\
+6 & $C(y_0)$ & Luật Modus Ponens từ 3 và 5. \\
+7 & $\forall x \, (\neg T(x) \to \neg C(x))$ & Tiền đề (2) \\
+8 & $\forall x \, (C(x) \to T(x))$ & Luật phản đảo tương đương logic từ 7. \\
+9 & $C(y_0) \to T(y_0)$ & Đặc tả phổ dụng (UI) từ 8 với $x = y_0$. \\
+10 & $T(y_0)$ & Luật Modus Ponens từ 6 và 9. \\
+11 & $L(y_0) \land C(y_0) \land T(y_0)$ & Luật hội (Conjunction) từ các bước 3, 6 và 10. \\
+12 & $\exists x \, (L(x) \land C(x) \land T(x))$ & Khái quát hóa tồn tại (Existential Generalization - EG) từ 11. \\
+\hline
+\end{tabular}
+\caption{Bảng suy diễn chứng minh kết luận từ các tiền đề}
+\end{table}
+
+\textbf{Kết luận:} Suy luận hợp lý, mệnh đề được chứng minh hoàn tất (Q.E.D.).
+
+\newpage
+\section{BÀI 3: Giải và biện luận phương trình theo tham số m}
+
+\subsection{a. Phương trình bậc nhất theo tham số $m$}
+\textbf{Ví dụ đề bài:} Giải và biện luận: $(m^2 - 4)x + 2m - 4 = 0$.
+
+\textbf{Phương pháp giải tổng quát:}
+Phương trình có dạng $A(m)x + B(m) = 0 \iff A(m)x = -B(m)$.
+\begin{enumerate}
+    \item Tìm các giá trị làm hệ số $x$ triệt tiêu: $A(m) = 0$.
+    \item Với từng giá trị $m_0$ làm $A(m_0) = 0$:
+    \begin{itemize}
+        \item Nếu $-B(m_0) = 0$: Phương trình có dạng $0x = 0 \implies$ Vô số nghiệm thuộc $\mathbb{R}$.
+        \item Nếu $-B(m_0) \ne 0$: Phương trình có dạng $0x = c \ne 0 \implies$ Vô nghiệm.
+    \end{itemize}
+    \item Với $A(m) \ne 0$: Phương trình có nghiệm duy nhất $x = -\frac{B(m)}{A(m)}$ (rút gọn tối giản).
+\end{enumerate}
+
+\textbf{Lời giải cụ thể cho ví dụ:}
+$(m^2 - 4)x + 2m - 4 = 0 \iff (m^2 - 4)x = 4 - 2m = -2(m - 2)$.
+\begin{itemize}
+    \item Hệ số $A(m) = m^2 - 4 = 0 \iff m = 2$ hoặc $m = -2$.
+    \item \textbf{Nếu $m = 2$}: $0 \cdot x = -2(2 - 2) = 0 \iff 0x = 0 \implies$ Phương trình có \textbf{vô số nghiệm thuộc $\mathbb{R}$}.
+    \item \textbf{Nếu $m = -2$}: $0 \cdot x = -2(-2 - 2) = 8 \iff 0x = 8 \implies$ Phương trình \textbf{vô nghiệm}.
+    \item \textbf{Nếu $m \ne 2$ và $m \ne -2$}: Phương trình có \textbf{nghiệm duy nhất}:
+    \begin{equation}
+        x = \frac{-(2m - 4)}{m^2 - 4} = \frac{-2(m - 2)}{(m - 2)(m + 2)} = \frac{-2}{m + 2}
+    \end{equation}
+\end{itemize}
+
+\subsection{b*. Phương trình bậc hai theo tham số $m$}
+\textbf{Ví dụ đề bài:} Giải và biện luận: $(m - 2)x^2 - 2(m + 2)x + m + 2 = 0$.
+
+\textbf{Phương pháp giải và biện luận:}
+\begin{enumerate}
+    \item \textbf{Trường hợp 1: Hệ số $A = 0 \iff m - 2 = 0 \iff m = 2$.}
+    Phương trình trở thành phương trình bậc nhất:
+    \begin{equation}
+        0 \cdot x^2 - 2(2 + 2)x + 2 + 2 = 0 \iff -8x + 4 = 0 \iff x = \frac{1}{2}
+    \end{equation}
+    Phương trình có nghiệm duy nhất $x = \frac{1}{2}$.
+    
+    \item \textbf{Trường hợp 2: Hệ số $A \ne 0 \iff m \ne 2$.}
+    Phương trình là phương trình bậc hai với $A = m - 2$, $B' = -(m + 2)$, $C = m + 2$.
+    Tính biệt thức thu gọn:
+    \begin{equation}
+        \Delta' = (B')^2 - AC = [-(m + 2)]^2 - (m - 2)(m + 2) = (m + 2)[(m + 2) - (m - 2)] = 4(m + 2)
+    \end{equation}
+    Biện luận theo dấu của $\Delta'$:
+    \begin{itemize}
+        \item \textbf{Nếu $\Delta' < 0 \iff 4(m + 2) < 0 \iff m < -2$}:
+        Phương trình \textbf{vô nghiệm thực}.
+        
+        \item \textbf{Nếu $\Delta' = 0 \iff m = -2$}:
+        Phương trình có \textbf{nghiệm kép}:
+        \begin{equation}
+            x = -\frac{B'}{A} = \frac{m + 2}{m - 2} = \frac{-2 + 2}{-2 - 2} = 0
+        \end{equation}
+        
+        \item \textbf{Nếu $\Delta' > 0 \iff m > -2$ (và $m \ne 2$)}:
+        Phương trình có \textbf{hai nghiệm phân biệt}:
+        \begin{equation}
+            x_{1,2} = \frac{-B' \pm \sqrt{\Delta'}}{A} = \frac{(m + 2) \pm 2\sqrt{m + 2}}{m - 2}
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+\section{BÀI 4: Phân tích đa thức thành nhân tử từng bước}
+
+\subsection{Yêu cầu và Thuật toán}
+Viết chương trình thực hiện giải từng bước bài toán phân tích đa thức thành nhân tử theo hướng dẫn:
+\begin{itemize}
+    \item Sử dụng hàm \texttt{factor} của thư viện đại số máy tính để thu được kết quả cuối cùng.
+    \item Suy luận ngược từ kết quả: Tách các hạng tử của thừa số thứ nhất để nhân với các thừa số còn lại.
+    \item Khai triển thành các nhóm trung gian, sau đó đặt nhân tử chung từng nhóm và cuối cùng gom lại thành dạng tích.
+    \item Sử dụng đệ quy cho trường hợp có từ 3 thừa số trở lên.
+\end{itemize}
+
+\subsection{Ví dụ mẫu}
+Phân tích đa thức $x^2 - y^2$:
+\begin{align*}
+    x^2 - y^2 &= (x^2 - xy) + (xy - y^2) \\
+              &= x(x - y) + y(x - y) \\
+              &= (x + y)(x - y)
+\end{align*}
+
+\subsection{Cài đặt thuật toán bằng Python}
+Mã nguồn hàm phân tích từng bước trong file \texttt{bai\_4\_phan\_tich\_nhan\_tu.py}:
+\begin{lstlisting}[language=Python]
+import sympy as sp
+
+def phan_tich_tung_buoc_2_thua_so(f1, f2):
+    terms_f1 = sp.Add.make_args(f1)
+    
+    # Buoc 1: Khai trien tung nhom: hang tu cua f1 nhan f2
+    expanded_groups = [sp.expand(t * f2) for t in terms_f1]
+    step1_str = " + ".join(f"({g})" for g in expanded_groups)
+    
+    # Buoc 2: Dat nhan tu chung cho tung nhom
+    step2_str = " + ".join(f"{t}({f2})" for t in terms_f1)
+    
+    # Buoc 3: Nhan tu tich cuoi cung
+    step3_str = f"({f1})({f2})"
+    
+    return step1_str, step2_str, step3_str
+\end{lstlisting}
+
+\newpage
+\section{Hướng dẫn chạy mã nguồn Python và Cấu trúc nộp bài}
+
+\subsection{Cấu trúc thư mục nộp bài}
+\begin{verbatim}
+CDCSTT/
+|-- Bao_Cao_Bai_Tap_1.tex         # Báo cáo LaTeX đầy đủ các bài
+|-- Danh_sach_nhom.csv            # Danh sách phân công nhóm học viên
+|-- bai_1_logic.py                # Mã nguồn bài 1
+|-- bai_2_logic_chung_minh.py     # Mã nguồn bài 2*
+|-- bai_3_bien_luan_pt.py         # Mã nguồn bài 3 (bậc 1 & bậc 2)
+|-- bai_4_phan_tich_nhan_tu.py    # Mã nguồn bài 4 (từng bước & đệ quy)
+|-- main.py                       # Menu giao diện dòng lệnh chạy tổng hợp
+|-- requirements.txt              # Thư viện phụ thuộc (sympy)
+`-- README.md                     # Tài liệu hướng dẫn sử dụng chi tiết
+\end{verbatim}
+
+\subsection{Cách cài đặt và thực thi}
+\begin{enumerate}
+    \item \textbf{Cài đặt thư viện:}
+    \begin{lstlisting}[language=bash]
+pip install -r requirements.txt
+    \end{lstlisting}
+    
+    \item \textbf{Chạy chương trình tổng hợp tất cả bài tập:}
+    \begin{lstlisting}[language=bash]
+python main.py --all
+    \end{lstlisting}
+    
+    \item \textbf{Chạy từng bài đơn lẻ:}
+    \begin{lstlisting}[language=bash]
+python bai_1_logic.py
+python bai_2_logic_chung_minh.py
+python bai_3_bien_luan_pt.py
+python bai_4_phan_tich_nhan_tu.py
+    \end{lstlisting}
+\end{enumerate}
+
+\end{document}
