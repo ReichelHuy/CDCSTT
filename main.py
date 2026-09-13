@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 CHƯƠNG TRÌNH CHÍNH - BÀI TẬP 1
-Môn học: Cơ sở Logic và Toán rời rạc / Đại số máy tính
+Môn học: Chuyên đề nghiên cứu và ứng dụng về Công nghệ tri thức
 Hỗ trợ chạy và kiểm tra tất cả các bài:
   - Bài 1: Logic vị từ cơ bản (C(x), D(x), F(x))
   - Bài 2*: Logic bậc nhất nâng cao & Chứng minh hình thức

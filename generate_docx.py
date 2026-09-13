@@ -263,9 +263,9 @@ def create_report():
                 r.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
     
     data = [
-        ["1", "Nguyễn Đình Duy", "(Điền MSSV)", "(Điền Lớp)"],
-        ["2", "Thành viên 2", "(Điền MSSV)", "(Điền Lớp)"],
-        ["3", "Thành viên 3", "(Điền MSSV)", "(Điền Lớp)"],
+        ["1", "Đặng Quốc Lộc", "26848116", "CS2307"],
+        ["2", "(chưa điền)", "(chưa điền)", "(chưa điền)"],
+        ["3", "(chưa điền)", "(chưa điền)", "(chưa điền)"],
     ]
     for ri, row_data in enumerate(data):
         for ci, val in enumerate(row_data):
