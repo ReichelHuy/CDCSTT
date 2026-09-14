@@ -204,59 +204,32 @@ Trên $M_1$ cả năm câu đều đúng, nên riêng mô hình này chưa phân
 
 \subsubsection{a. Không nhà logic nào uống café}
 \begin{itemize}
-    \item \textbf{Dạng chuẩn:} $\forall x \, (L(x) \to \neg C(x))$ hoặc $\neg \exists x \, (L(x) \land C(x))$.
-    \item \textbf{Sử dụng dấu $=$:}
-    \begin{equation}
-        \forall x \forall y \, ((L(x) \land C(y)) \to x \neq y)
-    \end{equation}
-    Cách đọc: lấy bất kỳ một nhà logic $x$ và bất kỳ một người uống café $y$, hai người đó không bao giờ là một.
-    \item \textbf{Dạng tương đương:} cách viết sau cũng đúng và tương đương hoàn toàn:
-    \begin{equation}
-        \forall x \forall y \, ((y = x \land L(x)) \to \neg C(y))
-    \end{equation}
-    Cả hai đều rút về $\forall x \forall y \, \neg (x = y \land L(x) \land C(y))$, chỉ khác chỗ đặt đẳng thức ở vế trái hay vế phải của phép kéo theo.
+    \item \textbf{Biểu diễn:} $\forall x \forall y \, ((L(x) \land C(y)) \to x \neq y)$
+    \item \textbf{Phát biểu:} Với mọi x, y, nếu x là nhà logic và y uống café thì x, y không thể là cùng một người.
 \end{itemize}
 
 \subsubsection{b. Bất kỳ ai là một nhà logic cũng đều là bạn của ai đó}
 \begin{itemize}
-    \item \textbf{Phân tích:} Nếu $x$ là một nhà logic thì tồn tại một người $y$ sao cho người bạn duy nhất của $y$ chính là $x$ ($x = f(y)$).
-    \item \textbf{Biểu diễn:}
-    \begin{equation}
-        \forall x \, (L(x) \to \exists y \, (x = f(y)))
-    \end{equation}
+    \item \textbf{Biểu diễn:} $\forall x \, (L(x) \to \exists y \, (x = f(y)))$
+    \item \textbf{Phát biểu:} Với mọi x, nếu x là nhà logic thì tồn tại y sao cho bạn của y chính là x.
 \end{itemize}
 
 \subsubsection{c. Không người nào phát biểu được định lý lại có một người bạn uống café}
 \begin{itemize}
-    \item \textbf{Phân tích:} Với mọi $x$, nếu $x$ phát biểu được định lý ($T(x)$) thì bạn của $x$ ($f(x)$) không uống café ($\neg C(f(x))$).
-    \item \textbf{Biểu diễn (sử dụng dấu $=$):}
-    \begin{equation}
-        \forall x \forall y \, ((y = f(x) \land T(x)) \to \neg C(y))
-    \end{equation}
-    (Hoặc dạng rút gọn qua hàm: $\forall x \, (T(x) \to \neg C(f(x)))$).
+    \item \textbf{Biểu diễn:} $\forall x \forall y \, ((y = f(x) \land T(x)) \to \neg C(y))$
+    \item \textbf{Phát biểu:} Với mọi x, y, nếu y là bạn của x và x phát biểu được định lý, thì y không uống café.
 \end{itemize}
 
 \subsubsection{d. Ai có một người bạn làm việc chăm chỉ thì hoặc là một nhà logic hoặc cũng là một người làm việc chăm chỉ}
 \begin{itemize}
-    \item \textbf{Phân tích:} Với mọi cá thể $x$, nếu bạn của $x$ (tức $y = f(x)$) làm việc chăm chỉ ($W(y)$) thì $x$ là nhà logic ($L(x)$) hoặc $x$ làm việc chăm chỉ ($W(x)$).
-    \item \textbf{Biểu diễn:}
-    \begin{equation}
-        \forall x \forall y \, ((y = f(x) \land W(y)) \to (L(x) \lor W(x)))
-    \end{equation}
-    (Tương đương: $\forall x \, (W(f(x)) \to (L(x) \lor W(x)))$).
+    \item \textbf{Biểu diễn:} $\forall x \forall y \, ((y = f(x) \land W(y)) \to (L(x) \lor W(x)))$
+    \item \textbf{Phát biểu:} Với mọi x, y, nếu y là bạn của x và y làm việc chăm chỉ, thì x là nhà logic hoặc x cũng làm việc chăm chỉ.
 \end{itemize}
 
 \subsubsection{e. Mọi người bạn là một nhà logic}
 \begin{itemize}
-    \item \textbf{Phân tích:} Bất cứ ai là bạn của một người nào đó (nghĩa là tồn tại $y$ sao cho $x = f(y)$) thì người $x$ đó đều là một nhà logic.
-    \item \textbf{Biểu diễn:}
-    \begin{equation}
-        \forall x \, (\exists y \, (x = f(y)) \to L(x))
-    \end{equation}
-    Mệnh đề này tương đương logic với khẳng định: bạn của bất kỳ ai trong xã hội đều là nhà logic:
-    \begin{equation}
-        \forall y \, L(f(y))
-    \end{equation}
+    \item \textbf{Biểu diễn:} $\forall x \, (\exists y \, (x = f(y)) \to L(x))$
+    \item \textbf{Phát biểu:} Với mọi x, nếu tồn tại y sao cho x là bạn của y, thì x là nhà logic.
 \end{itemize}
 
 \subsection{Phần 2: Chứng minh hình thức suy luận logic}
@@ -266,37 +239,35 @@ Trên $M_1$ cả năm câu đều đúng, nên riêng mô hình này chưa phân
     \item[(2)] Ai không phát biểu được định lý đều không uống café: $\forall x \, (\neg T(x) \to \neg C(x))$
     \item[(3)] Có một số người mà bạn của họ là nhà logic: $\exists x \, L(f(x))$
 \end{enumerate}
-
-\textbf{Kết luận cần chứng minh:} Có một nhà logic uống café và phát biểu được định lý:
+\textbf{Kết luận cần chứng minh:} Có một nhà logic uống café và phát biểu được định lý.\\\\
+\textbf{Biểu diễn kết luận cần chứng minh:}
 \begin{equation}
-    \exists x \, (L(x) \land C(x) \land T(x))
+    \exists x \, (L(x) \land C(x) \land T(x))\\
 \end{equation}
-
-\textbf{Bảng các bước suy diễn hình thức:}
+\textbf{Chứng minh bằng suy diễn tự nhiên:}
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|l|p{6.6cm}|c|}
 \hline
-\textbf{Bước} & \textbf{Biểu thức khẳng định} & \textbf{Quy tắc suy diễn} & \textbf{Từ} \\
+\textbf{Bước} & \textbf{Biểu thức} & \textbf{Quy tắc suy diễn} & \textbf{Từ} \\
 \hline
-1 & $\exists x \, L(f(x))$ & Tiền đề (3) & --- \\
-2 & $L(f(c))$ & Đặc tả tồn tại (Existential Instantiation), với $c$ là một cá thể mới chưa xuất hiện trước đó & 1 \\
-3 & $L(y_0)$, đặt $y_0 = f(c)$ & Đặt tên hạng từ: $f(c)$ là một hạng từ đóng xác định nên gọi được là $y_0$ & 2 \\
-4 & $\forall x \, (L(x) \to C(x))$ & Tiền đề (1) & --- \\
-5 & $L(y_0) \to C(y_0)$ & Đặc tả phổ dụng (Universal Instantiation), thay $x$ bởi $y_0$ & 4 \\
-6 & $C(y_0)$ & Modus Ponens & 3, 5 \\
-7 & $\forall x \, (\neg T(x) \to \neg C(x))$ & Tiền đề (2) & --- \\
-8 & $\forall x \, (C(x) \to T(x))$ & Luật phản đảo (contrapositive), tương đương logic & 7 \\
-9 & $C(y_0) \to T(y_0)$ & Đặc tả phổ dụng, thay $x$ bởi $y_0$ & 8 \\
-10 & $T(y_0)$ & Modus Ponens & 6, 9 \\
-11 & $L(y_0) \land C(y_0) \land T(y_0)$ & Luật hội (conjunction) & 3, 6, 10 \\
-12 & $\exists x \, (L(x) \land C(x) \land T(x))$ & Khái quát hoá tồn tại (Existential Generalization) & 11 \\
+1 & $\exists x \, L(f(x))$                          & Tiền đề (3) & --- \\
+2 & $L(f(c))$                                       & Đặc tả tồn tại, với $c$ là một cá thể mới chưa xuất hiện trước đó & 1 \\
+3 & $L(y_0)$, đặt $y_0 = f(c)$                      & Đặt tên hạng từ: $f(c)$ là một hạng từ đóng xác định nên gọi được là $y_0$ & 2 \\
+4 & $\forall x \, (L(x) \to C(x))$                  & Tiền đề (1) & --- \\
+5 & $L(y_0) \to C(y_0)$                             & Đặc tả phổ dụng, thay $x$ bởi $y_0$ & 4 \\
+6 & $C(y_0)$                                        & Luật Modus Ponens & 3, 5 \\
+7 & $\forall x \, (\neg T(x) \to \neg C(x))$        & Tiền đề (2) & --- \\
+8 & $\forall x \, (C(x) \to T(x))$                  & Luật phản đảo & 7 \\
+9 & $C(y_0) \to T(y_0)$                             & Đặc tả phổ dụng, thay $x$ bởi $y_0$ & 8 \\
+10 & $T(y_0)$                                       & Luật Modus Ponens & 6, 9 \\
+11 & $L(y_0) \land C(y_0) \land T(y_0)$             & Luật hội & 3, 6, 10 \\
+12 & $\exists x \, (L(x) \land C(x) \land T(x))$    & Khái quát hoá tồn tại & 11 \\
 \hline
 \end{tabular}
-\caption{Bảng suy diễn chứng minh kết luận từ các tiền đề. Cột cuối ghi rõ mỗi bước rút ra từ những bước nào.}
-\end{table}
-
-\textbf{Kết luận:} Suy luận hợp lý, mệnh đề được chứng minh hoàn tất (Q.E.D.).
+\caption{Bảng suy diễn tự nhiên chứng minh kết luận từ các tiền đề}
+\end{table}\\
+\textbf{Kết luận:} Từ các tiền đề (1), (2) và (3), có thể chứng minh được phát biểu "Có một nhà logic uống café và phát biểu được định lý".
 
 \newpage
 \section{BÀI 3: Giải và biện luận phương trình theo tham số m}
